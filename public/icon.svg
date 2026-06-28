@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="110" fill="#0b1f3a"/><path fill="#c7a45b" d="M128 350h256v34H128zM154 128h204v42H154zM178 202h156v34H178zM154 268h204v34H154z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="강남구상공회">
+  <defs>
+    <linearGradient id="blue" x1="0" y1="512" x2="260" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2f2a8f"/>
+      <stop offset="1" stop-color="#0068b7"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="300" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00a9e8"/>
+      <stop offset="1" stop-color="#15c9de"/>
+    </linearGradient>
+    <pattern id="dotPattern" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="5.5" fill="#0098d8"/>
+    </pattern>
+    <pattern id="whiteDotPattern" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="5.5" fill="#ffffff"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="#ffffff"/>
+  <rect x="300" y="0" width="212" height="512" fill="url(#cyan)"/>
+  <path fill="url(#blue)" d="M0 153l63-11c5-19 12-37 23-53L49 36 86 0l53 39c17-9 35-16 54-19L209 0h67l-20 96c-66 5-118 60-118 127s52 122 118 127l20 162h-67l-16-78c-19-3-37-10-54-19l-53 39-37-36 37-53c-11-16-18-34-23-53L0 301V153z"/>
+  <circle cx="254" cy="223" r="87" fill="#ffffff"/>
+  <path d="M247 0c58 59 90 122 92 187 2 83-44 144-43 219 0 40 10 74 28 106H217c-9-25-14-52-14-80 0-82 48-142 46-219-1-70-45-138-104-213h102z" fill="url(#dotPattern)"/>
+  <path d="M328 0c48 58 77 119 79 181 2 83-44 143-43 219 0 42 11 77 31 112H292c-17-39-25-76-26-112-1-82 45-142 43-219-1-62-35-122-85-181h104z" fill="url(#whiteDotPattern)"/>
+</svg>
