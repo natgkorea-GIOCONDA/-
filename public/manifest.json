@@ -1,1 +1,17 @@
-{"name":"Gangnam CEO Directory","short_name":"CEO Directory","start_url":"/dashboard","display":"standalone","background_color":"#0b1f3a","theme_color":"#0b1f3a","description":"강남구상공회 CEO과정 회원검색","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml"}]}
+{
+  "name": "강남구상공회",
+  "short_name": "강남구상공회",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b1f3a",
+  "description": "강남구상공회 회원사",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
