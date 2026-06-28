@@ -40,3 +40,38 @@ create policy "admins insert members" on public.members for insert to authentica
 create policy "admins update members" on public.members for update to authenticated using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
 create policy "admins delete members" on public.members for delete to authenticated using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
 insert into storage.buckets (id, name, public) values ('member-photos','member-photos',true) on conflict (id) do nothing;
+
+
+-- Public profile photos are readable, but only admins can mutate files in this bucket.
+drop policy if exists "public read member photos" on storage.objects;
+create policy "public read member photos" on storage.objects
+  for select to public
+  using (bucket_id = 'member-photos');
+
+drop policy if exists "admins upload member photos" on storage.objects;
+create policy "admins upload member photos" on storage.objects
+  for insert to authenticated
+  with check (
+    bucket_id = 'member-photos'
+    and exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin)
+  );
+
+drop policy if exists "admins update member photos" on storage.objects;
+create policy "admins update member photos" on storage.objects
+  for update to authenticated
+  using (
+    bucket_id = 'member-photos'
+    and exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin)
+  )
+  with check (
+    bucket_id = 'member-photos'
+    and exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin)
+  );
+
+drop policy if exists "admins delete member photos" on storage.objects;
+create policy "admins delete member photos" on storage.objects
+  for delete to authenticated
+  using (
+    bucket_id = 'member-photos'
+    and exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin)
+  );
