@@ -27,8 +27,9 @@
 ## Supabase 설정
 - Authentication > Providers에서 Email 로그인 활성화
 - 공개 self-signup은 앱 UI에서 제공하지 않습니다. 운영에서는 초대/관리자 생성 방식으로 계정을 발급하세요.
-- Storage bucket `member-photos`는 `schema.sql`에서 public으로 생성됩니다.
+- Storage bucket `member-photos`는 `schema.sql`에서 public으로 생성됩니다. 회원 사진은 공개 읽기가 가능하지만 업로드/수정/삭제는 관리자 프로필(`profiles.is_admin=true`)로 로그인한 사용자만 가능합니다.
 - RLS 정책은 인증 사용자에게 `privacy_consent=true` 및 `is_visible=true` 회원만 읽게 하고, 관리자만 전체 CRUD를 허용합니다.
+- 비밀번호 재설정 메일의 Redirect URL은 `/reset-password` 경로를 허용해야 합니다. Supabase Auth URL Configuration에 로컬/배포 도메인의 `/reset-password`를 추가하세요.
 
 ## Vercel 배포
 1. Git 저장소를 Vercel에 연결
