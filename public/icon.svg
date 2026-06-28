@@ -1,24 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="강남구상공회">
   <defs>
-    <linearGradient id="blue" x1="0" y1="512" x2="260" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2f2a8f"/>
-      <stop offset="1" stop-color="#0068b7"/>
+    <linearGradient id="gearBlue" x1="20" y1="420" x2="230" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2d238f"/>
+      <stop offset="1" stop-color="#006bb6"/>
     </linearGradient>
-    <linearGradient id="cyan" x1="300" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#00a9e8"/>
-      <stop offset="1" stop-color="#15c9de"/>
+    <linearGradient id="cyanPanel" x1="205" y1="0" x2="492" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00a5e6"/>
+      <stop offset="0.68" stop-color="#12bfe4"/>
+      <stop offset="1" stop-color="#f2fbff"/>
     </linearGradient>
-    <pattern id="dotPattern" width="28" height="28" patternUnits="userSpaceOnUse">
-      <circle cx="8" cy="8" r="5.5" fill="#0098d8"/>
+    <pattern id="blueDots" width="23" height="23" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="5.5" fill="#008fd3"/>
     </pattern>
-    <pattern id="whiteDotPattern" width="28" height="28" patternUnits="userSpaceOnUse">
-      <circle cx="8" cy="8" r="5.5" fill="#ffffff"/>
+    <pattern id="whiteDots" width="25" height="25" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="5.2" fill="#ffffff"/>
     </pattern>
+    <clipPath id="safeRound">
+      <rect x="6" y="6" width="500" height="500" rx="86"/>
+    </clipPath>
   </defs>
-  <rect width="512" height="512" fill="#ffffff"/>
-  <rect x="300" y="0" width="212" height="512" fill="url(#cyan)"/>
-  <path fill="url(#blue)" d="M0 153l63-11c5-19 12-37 23-53L49 36 86 0l53 39c17-9 35-16 54-19L209 0h67l-20 96c-66 5-118 60-118 127s52 122 118 127l20 162h-67l-16-78c-19-3-37-10-54-19l-53 39-37-36 37-53c-11-16-18-34-23-53L0 301V153z"/>
-  <circle cx="254" cy="223" r="87" fill="#ffffff"/>
-  <path d="M247 0c58 59 90 122 92 187 2 83-44 144-43 219 0 40 10 74 28 106H217c-9-25-14-52-14-80 0-82 48-142 46-219-1-70-45-138-104-213h102z" fill="url(#dotPattern)"/>
-  <path d="M328 0c48 58 77 119 79 181 2 83-44 143-43 219 0 42 11 77 31 112H292c-17-39-25-76-26-112-1-82 45-142 43-219-1-62-35-122-85-181h104z" fill="url(#whiteDotPattern)"/>
+
+  <rect width="512" height="512" rx="92" fill="#ffffff"/>
+  <rect x="7" y="7" width="498" height="498" rx="88" fill="none" stroke="#0068b7" stroke-width="9"/>
+
+  <g clip-path="url(#safeRound)">
+    <rect x="203" y="91" width="286" height="330" fill="url(#cyanPanel)"/>
+
+    <g transform="translate(5 86) scale(.68)">
+      <path fill="url(#gearBlue)" d="M0 153l63-11c5-19 12-37 23-53L49 36 86 0l53 39c17-9 35-16 54-19L209 0h67l-20 96c-66 5-118 60-118 127s52 122 118 127l20 162h-67l-16-78c-19-3-37-10-54-19l-53 39-37-36 37-53c-11-16-18-34-23-53L0 301V153z"/>
+    </g>
+
+    <path fill="#ffffff" d="M198 91h73c64 0 116 74 116 165s-52 165-116 165h-73V91z"/>
+    <circle cx="189" cy="256" r="74" fill="#ffffff"/>
+
+    <path fill="url(#blueDots)" d="M200 91h71c64 0 116 74 116 165s-52 165-116 165h-71v-55h55c41 0 75-49 75-110s-34-110-75-110h-55V91z"/>
+    <path fill="url(#whiteDots)" d="M252 91h50c66 0 120 74 120 165s-54 165-120 165h-50v-54h40c41 0 76-50 76-111s-35-111-76-111h-40V91z" opacity=".98"/>
+
+    <rect x="203" y="91" width="14" height="330" fill="#0068b7"/>
+  </g>
 </svg>
