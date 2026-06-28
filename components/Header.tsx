@@ -1,0 +1,3 @@
+'use client';
+import Link from 'next/link';import { useRouter } from 'next/navigation';import { createClient } from '@/lib/supabase';
+export function Header(){const r=useRouter();return <header className="sticky top-0 z-10 border-b border-white/10 bg-navy text-white"><div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4"><Link href="/dashboard" className="font-bold">Gangnam CEO</Link><nav className="flex gap-3 text-sm"><Link href="/admin" className="text-gold">관리자</Link><button onClick={async()=>{await createClient().auth.signOut();r.replace('/')}}>로그아웃</button></nav></div></header>}
