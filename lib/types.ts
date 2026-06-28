@@ -1,0 +1,2 @@
+export type Member = { id:string; name:string; cohort:number; company_name:string; position:string|null; company_address:string|null; email:string|null; phone:string|null; website:string|null; industry:string|null; business_type:string|null; company_intro:string|null; photo_url:string|null; privacy_consent:boolean; is_visible:boolean; created_at:string; updated_at:string };
+export type MemberInput = Omit<Member,'id'|'created_at'|'updated_at'>;
