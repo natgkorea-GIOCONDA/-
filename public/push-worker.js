@@ -1,0 +1,1 @@
+addEventListener('push',e=>{let d={title:'강남구상공회',body:'새 알림',url:'/'};try{d=e.data.json()}catch(_){}e.waitUntil(registration.showNotification(d.title,{body:d.body,icon:'/icon.svg',data:d}))});addEventListener('notificationclick',e=>{e.notification.close();e.waitUntil(clients.openWindow(e.notification.data.url||'/'))});
