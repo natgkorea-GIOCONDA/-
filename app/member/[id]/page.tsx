@@ -1,27 +1,3 @@
 'use client';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import { AuthGate } from '@/components/AuthGate';
-import { Header } from '@/components/Header';
-import { createClient } from '@/lib/supabase';
-import type { Member } from '@/lib/types';
-
-export default function Detail() {
-  const params = useParams<{ id: string }>();
-  const id = params.id;
-  const [m, setM] = useState<Member | null>(null);
-
-  useEffect(() => {
-    createClient()
-      .from('members')
-      .select('*')
-      .eq('id', id)
-      .eq('is_visible', true)
-      .eq('privacy_consent', true)
-      .single()
-      .then(({ data }) => setM(data));
-  }, [id]);
-
-  return <AuthGate><Header/><main className="mx-auto max-w-2xl px-4 py-6">{m&&<section className="overflow-hidden rounded-3xl bg-white shadow-card"><div className="bg-navy p-6 text-white"><div className="relative h-32 w-32 overflow-hidden rounded-3xl bg-white/10">{m.photo_url&&<Image src={m.photo_url} alt={m.name} fill className="object-cover"/>}</div><p className="mt-4 text-gold">CEO과정 {m.cohort}기</p><h1 className="text-3xl font-extrabold">{m.name}</h1><p>{m.company_name} · {m.position}</p></div><dl className="grid gap-4 p-6 text-lg">{[['주소',m.company_address],['이메일',m.email],['전화',m.phone],['웹사이트',m.website],['업종',m.industry],['사업유형',m.business_type],['회사소개',m.company_intro]].map(([k,v])=><div key={k}><dt className="text-sm font-bold text-gold">{k}</dt><dd className="whitespace-pre-wrap text-charcoal">{v||'-'}</dd></div>)}</dl></section>}</main></AuthGate>;
-}
+import { useEffect, useState } from 'react';import Image from 'next/image';import Link from 'next/link';import { useParams } from 'next/navigation';import { AuthGate } from '@/components/AuthGate';import { Header } from '@/components/Header';import { createClient } from '@/lib/supabase';import type { Member } from '@/lib/types';
+export default function Detail(){const params=useParams<{id:string}>();const id=params.id;const [m,setM]=useState<Member|null>(null);const [allowed,setAllowed]=useState<boolean|null>(null);useEffect(()=>{async function run(){const s=createClient();const {data:u}=await s.auth.getUser();if(!u.user){setAllowed(false);return}const [{data:p},{data:mine}]=await Promise.all([s.from('profiles').select('email,role,is_admin').eq('id',u.user.id).maybeSingle(),s.from('members').select('is_visible,privacy_consent').eq('user_id',u.user.id).maybeSingle()]);const admin=!!(p?.is_admin||p?.role==='super_admin'||p?.role==='co_admin'||p?.email==='natgkorea@gmail.com');const approved=!!(mine?.is_visible&&mine?.privacy_consent);if(!admin&&!approved){setAllowed(false);return}setAllowed(true);const {data}=await s.from('members').select('*').eq('id',id).eq('is_visible',true).eq('privacy_consent',true).single();setM(data)}run()},[id]);return <AuthGate><Header/><main className="mx-auto max-w-2xl px-4 py-6">{allowed===null&&<p className="rounded-3xl bg-white p-6 shadow-card">확인 중입니다...</p>}{allowed===false&&<section className="rounded-3xl bg-white p-6 shadow-card"><h1 className="text-2xl font-extrabold text-navy">승인 대기 중입니다</h1><p className="mt-3 leading-7 text-slate-600">관리자 승인 전에는 다른 임원사 정보를 볼 수 없습니다.</p><Link href="/profile" className="mt-5 inline-block rounded-2xl bg-navy px-5 py-3 font-bold text-white">내 정보 입력/수정</Link></section>}{allowed&&m&&<section className="overflow-hidden rounded-3xl bg-white shadow-card"><div className="bg-navy p-6 text-white"><div className="relative h-32 w-32 overflow-hidden rounded-3xl bg-white/10">{m.photo_url&&<Image src={m.photo_url} alt={m.name} fill className="object-cover"/>}</div><p className="mt-4 text-gold">CEO과정 {m.cohort}기</p><h1 className="text-3xl font-extrabold">{m.name}</h1><p>{m.company_name} · {m.position}</p></div><dl className="grid gap-4 p-6 text-lg">{[['주소',m.company_address],['이메일',m.email],['전화',m.phone],['웹사이트',m.website],['업종',m.industry],['사업유형',m.business_type],['회사소개',m.company_intro]].map(([k,v])=><div key={k}><dt className="text-sm font-bold text-gold">{k}</dt><dd className="whitespace-pre-wrap text-charcoal">{v||'-'}</dd></div>)}</dl></section>}</main></AuthGate>}
