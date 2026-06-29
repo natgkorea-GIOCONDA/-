@@ -1,0 +1,3 @@
+import { NextRequest, NextResponse } from 'next/server';import { createClient } from '@supabase/supabase-js';
+const url=process.env.NEXT_PUBLIC_SUPABASE_URL!;const anon=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+export async function POST(req:NextRequest){const token=(req.headers.get('authorization')||'').replace('Bearer ','');const c=createClient(url,anon,{global:{headers:{Authorization:'Bearer '+token}}});const {data}=await c.auth.getUser();if(!data.user)return NextResponse.json({error:'unauthorized'},{status:401});const sub=await req.json();const {error}=await c.from('push_subscriptions').upsert({user_id:data.user.id,subscription:sub},{onConflict:'user_id'});if(error)return NextResponse.json({error:error.message},{status:400});return NextResponse.json({ok:true})}
